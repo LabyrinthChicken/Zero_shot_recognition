@@ -4,6 +4,7 @@ from .ResNet import *
 
 __factory = {
     'resnet50': ResNet50,
+    'resnet18': ResNet18,
 }
 
 def get_names():

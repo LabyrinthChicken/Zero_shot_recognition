@@ -30,7 +30,7 @@ from utils import AverageMeter, load_network, save_network, get_accuracy, mkdir_
 parser = argparse.ArgumentParser(description='Training')
 parser.add_argument('--gpu_ids',default='0', type=str,help='gpu_ids: e.g. 0  0,1,2  0,2')
 parser.add_argument('--name',default='baseline', type=str, help='output model name')
-parser.add_argument('--arch',default='resnet50', type=str, help='which backbone to use')
+parser.add_argument('--arch',default='resnet18', type=str, help='which backbone to use')
 parser.add_argument('--train_all', action='store_true', help='use all training data' )
 parser.add_argument('--pretrain_epoch', default=0, type=int, help='0,1,2,3...or last')
 parser.add_argument('--load_epoch',default=None, type=str, help='0,1,2,3...or last')
@@ -191,10 +191,10 @@ def test(model, data_loader, file_path):
     data = pd.read_csv(ref.test_file_image, sep='\t', header=None)
     file_list = data[0].values.tolist()
 
-    f = open(file_path, 'w')
-    for name,label in zip(file_list,predict_label):
-        line = ' '.join((name,label))
-        f.write(line + '\n')
+    with open(file_path, 'w') as f:
+        for name,label in zip(file_list,predict_label):
+            line = ' '.join((name,label))
+            f.write(line + '\n')
 
 
 model = models.init_model(name=args.arch, output_dim=30)
@@ -208,7 +208,7 @@ if args.load_epoch != None:
     start_epoch = int(args.load_epoch) + 1
 
 if args.test == True:
-    test(model, data_loader['test'], file_path=os.path.join(args.name,'out.txt'))
+    test(model, data_loader['test'], file_path= os.path.join(args.name,args.load_epoch+'out.txt'))
     os._exit()
 
 # Decay LR by a factor of 0.1 every 40 epochs
@@ -218,7 +218,7 @@ if ref.stepsize > 0:
 
 criterion = nn.MSELoss(reduce=True)
 train(model, data_loader, criterion, optimizer, scheduler, start_epoch, ref.max_epochs)
-test(model, data_loader['test'] , os.path.join(args.name,'out.txt'))
+test(model, data_loader['test'] , os.path.join(args.name,'last_'+'out.txt'))
 
 
 

@@ -22,7 +22,7 @@ file_attribute_pc = osp.join(train_dir, 'attributes_per_class.txt')
 # Super parameter
 # --------
 
-lr = 0.1
+lr = 1e-4
 gamma = 0.1
 weight_decay = 5e-04
 stepsize = 40
