@@ -149,7 +149,7 @@ def train():
                 print('Train elapsed {} steps'.format(step))
 
         if not use_all_data:
-            model eval
+            #model eval
             model.eval()
             eval_loss = 0.
             print('Validation....')
@@ -165,11 +165,11 @@ def train():
                 if step % 50 == 0:
                     print('Validation elapsed {} steps!'.format(step))
 
-            #get accuracy of train_set and val_set
-            #train_predict_labels = get_label(train_predict, label_data) # 获得距离最小的对应类的名称
-            #train_accuracy = get_accuracy(train_predict_labels, train_class_label)
-            #val_predict_labels = get_label(val_predict, label_data)  # 获得距离最小的对应类的名称
-            #val_accuracy = get_accuracy(val_predict_labels, val_class_label)
+        #get accuracy of train_set and val_set
+        #train_predict_labels = get_label(train_predict, label_data) # 获得距离最小的对应类的名称
+        #train_accuracy = get_accuracy(train_predict_labels, train_class_label)
+        #val_predict_labels = get_label(val_predict, label_data)  # 获得距离最小的对应类的名称
+        #val_accuracy = get_accuracy(val_predict_labels, val_class_label)
 
         print('-'*50)
         print('Epoch: ', epoch, '|Train Loss: ', train_loss, '|Val Loss: ', eval_loss)
