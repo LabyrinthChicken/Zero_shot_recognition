@@ -19,6 +19,9 @@ from PIL import Image
 import os.path as osp
 import os
 
+"""
+Author: hecc
+"""
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 transforms_train_list = [#transforms.Resize((72,72), interpolation=3), #Image.BICUBIC
                          #transforms.RandomCrop((64, 64)),
